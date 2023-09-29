@@ -71,7 +71,7 @@
                 <td><?php echo $seguro; ?></td>
             </tr>
             <tr>
-                <th>Horario</th>
+                <th>Horarios</th>
                 <td>
                     <?php
                         if(isset($_POST["manana"]))
