@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultado Suma</title>
+    <title>Resultado Operación Matemática</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -44,20 +44,39 @@
 </head>
 <body>
     <div class="container">
-    <?php
-        $answer = $_GET["respuesta"];
-        $numero1 = $_GET["numero1"];        
-        $numero2 = $_GET["numero2"];     
-    ?>
-        <h1>Resultado suma:</h1>
-        <p>Tu respuesta es <?php echo $answer; ?>,</p>
-        <p>La respuesta es 
-        <?php if ($answer == ($numero1 + $numero2)) { ?>
-            <span class="correct">correcta</span>
-        <?php } else { ?>
-            <span class="incorrect">incorrecta</span>
-        <?php } ?>
-        </p>
+        <?php
+        $respuesta = $_GET["respuesta"];
+        $numero1 = $_GET["numero1"];
+        $numero2 = $_GET["numero2"];
+        $operacion = $_GET["operacion"];
+        $resultado = 0;
+        $mensaje = "";
+
+        if ($operacion === "+") {
+            $resultado = $numero1 + $numero2;
+        } elseif ($operacion === "-") {
+            $resultado = $numero1 - $numero2;
+        } elseif ($operacion === "*") {
+            $resultado = $numero1 * $numero2;
+        }
+
+        if ($respuesta == $resultado) {
+            $mensaje = "correcta";
+            $claseMensaje = "correct";
+           echo '<form action="index.php">';
+                echo '<input type="submit" value="Volver atras" />';
+            echo "</form>";
+        } else {
+            $mensaje = "incorrecta";
+            $claseMensaje = "incorrect";
+            echo '<button onclick="history.go(-1)">Volver</button>';
+        }
+        ?>
+
+        <h1>Resultado <?php echo $operacion; ?>:</h1>
+        <p>Tu respuesta es <?php echo $respuesta; ?>,</p>
+        <p>La respuesta es <span class="<?php echo $claseMensaje; ?>"><?php echo $mensaje; ?></span></p>
+        
     </div>
 </body>
 </html>

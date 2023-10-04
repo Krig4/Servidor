@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuadernillo Rubio</title>
+    <title>Operaciones Matemáticas</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,16 +13,7 @@
             padding: 0;
         }
 
-        h1 {
-            color: #333;
-            margin-top: 30px;
-        }
-
-        p {
-            color: #666;
-        }
-
-        form {
+        .container {
             background-color: #fff;
             border-radius: 5px;
             padding: 20px;
@@ -31,46 +22,57 @@
             margin: 0 auto;
         }
 
-        h4 {
-            font-size: 20px;
+        h1 {
             color: #333;
-            margin-top: 10px;
         }
 
-        input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+        p {
+            color: #666;
+            margin: 10px 0;
         }
 
-        input[type="submit"] {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
+        .correct {
+            color: #008000;
+            font-weight: bold;
         }
 
-        input[type="submit"]:hover {
-            background-color: #0056b3;
+        .incorrect {
+            color: #FF0000;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <h1>Suma de Números Aleatorios</h1>
-    <p>Rellena la suma de los siguientes dos números:</p>
-    
-    <form id="formulario" method="GET" action="recogesuma.php">
-        <input type="number" name="numero1" value=<?php echo $numero1 = rand(1,20);?> hidden>            
-        <input type="number" name="numero2" value=<?php echo $numero2 = rand(1,20);?> hidden>
-        <h4><?php echo "$numero1 + $numero2 = " ?></h4>            
-        <input type="number" id="respuesta" name="respuesta">
-        <br>
-        <input type="submit" value="Comprobar">
-    </form>
+    <div class="container">
+        <?php
+        $numero1 = rand(1, 20);
+        $numero2 = rand(1, 20);
+        $operaciones = ["+", "-", "*"];
+        $operacion = $operaciones[array_rand($operaciones)];
+        $resultado = 0;
+        $mensaje = "";
+
+        if ($operacion === "+") {
+            $resultado = $numero1 + $numero2;
+        } elseif ($operacion === "-") {
+            $resultado = $numero1 - $numero2;
+        } elseif ($operacion === "*") {
+            $resultado = $numero1 * $numero2;
+        }
+        ?>
+
+        <h1>Operación Matemática</h1>
+        <p>Resuelve la siguiente operación:</p>
+        <p><?php echo "$numero1 $operacion $numero2 = ?"; ?></p>
+
+        <form method="GET" action="recogesuma.php">
+            <input type="hidden" name="numero1" value="<?php echo $numero1; ?>">
+            <input type="hidden" name="numero2" value="<?php echo $numero2; ?>">
+            <input type="hidden" name="operacion" value="<?php echo $operacion; ?>">
+            <input type="number" name="respuesta" required>
+            <br>
+            <input type="submit" value="Comprobar">
+        </form>
+    </div>
 </body>
 </html>
