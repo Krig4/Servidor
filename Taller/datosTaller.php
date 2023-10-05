@@ -42,11 +42,20 @@
         }
     </style>
 </head>
+<?php
+$nombre = $_POST["nombre"];
+$matricula = $_POST["matricula"];
+$telefono = $_POST["telefono"];
+$email = $_POST["email"];
+$marca = $_POST["marca"];
+$seguro = $_POST["seguro"]
+?>
 <body>
     <h1>Detalles del Cliente</h1>
     <table>
         <tbody>
             <tr>
+            
                 <th>Nombre</th>
                 <td><?php echo $nombre; ?></td>
             </tr>
