@@ -7,16 +7,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $sms = isset($_POST["chat"]) ? $_POST["chat"] : '';
 
     if (!empty($sms)) {
-        $hora = date("Y-m-d H:i:s");  // Variable obtener día y hora
-        $usuarioMensaje = $usuario;
-        $mensaje = "$hora, $usuarioMensaje: $sms\n";  // Combinada las tres variables para dar formato chat
+        $hora = date("Y-m-d H:i:s");  // Variable para obtener fecha y hora
+        $usuarioMensaje = htmlspecialchars($usuario, ENT_QUOTES, 'UTF-8'); // Escapar contenido del usuario
+        $sms = htmlspecialchars($sms, ENT_QUOTES, 'UTF-8'); // Escapar el mensaje
 
+        if (stripos($sms, '<script>') !== false) { //Si el mensaje contiene la palabra script, no lo ejecuta
+            header('Location: chat.php');
+            exit; 
+        }
+
+        $mensaje = "$hora, $usuarioMensaje: $sms\n";  // Combinar las tres variables para dar formato al chat
         $myfile = fopen("comentarios.csv", "a") or die("No se ha podido abrir el archivo!");
         fwrite($myfile, $mensaje);
         fclose($myfile);
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             background-color: #fff;
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            max-width: 400px;
+            max-width: 600px;
             margin: 0 auto;
             padding: 20px;
             overflow-y: scroll;
@@ -55,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             background-color: #fff;
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            max-width: 400px;
+            max-width: 600px;;
             margin: 0 auto;
             padding: 20px;
         }
