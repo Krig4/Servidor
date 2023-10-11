@@ -1,8 +1,8 @@
 <?php
-session_start();
+session_start(); // Lo usamos para mantener el usuario en distintos php y paginas
 $usuario = $_POST["usuario"];
 $password = $_POST["pass"];
-$_SESSION["usuario"] = $usuario;
+$_SESSION["usuario"] = $usuario; // Declaro variables que quiero mantener con esta estructura para el futuro de las paginas
 $_SESSION["pass"] = $password;
 $login = false;
 $fp = fopen("usuarios.csv", "r");
@@ -20,6 +20,6 @@ fclose($fp);
 if ($login) {
     header('Location: chat.php'); // Te manda a cualquier archivo directamente sin verse por el usuario
 } else {
-    echo "<script>alert('Contraseña incorrecta');</script>"; // Intentar que se muestre
+    // Intentar mostrar un mensaje de error al login
     header('Location: login.html');
 }

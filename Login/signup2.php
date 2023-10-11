@@ -2,8 +2,6 @@
 $usuario = $_POST["usuario"];
 $password = $_POST["pass"];
 $userFree = true; // Suponemos que el usuario está libre inicialmente
-
-// Abre el archivo para lectura
 $fp = fopen("usuarios.csv", "r");
 if ($fp) {
     while (($data = fgets($fp)) !== false) {
@@ -39,6 +37,45 @@ if ($userFree) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        div {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            max-width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        a {
+            display: block;
+            margin-top: 10px;
+            text-decoration: none;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 
 <body>
