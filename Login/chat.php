@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             exit; 
         }
 
-        $mensaje = "$hora, $usuarioMensaje: $sms\n";  // Combinar las tres variables para dar formato al chat
+        $mensaje = "<i>$hora</i>, <strong>$usuarioMensaje</strong>: $sms\n";  // Combinar las tres variables para dar formato al chat
         $myfile = fopen("comentarios.csv", "a") or die("No se ha podido abrir el archivo!");
         fwrite($myfile, $mensaje);
         fclose($myfile);
