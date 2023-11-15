@@ -27,7 +27,6 @@
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
     $json = curl_exec($curl);
     curl_close($curl);
-
     $objeto_json = json_decode($json);
     for ($i = 0; $i < count($objeto_json); ++$i) {
         echo '<h2>' . $objeto_json[$i]->name->common . '</h2>';

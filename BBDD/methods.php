@@ -55,36 +55,54 @@ function SearchStudent($conn, $searchname)
         echo "0 results";
     }
 }
-function SaveCSV($conn)
+function SaveCSV($conn) // SQL a CSV
 {
-    // Verifica la conexión
-    if ($conn->connect_error) {
-        die("Conexión fallida: " . $conn->connect_error);
-    }
-
+    // Limpiar el búfer de salida
+    ob_clean();
     // Realiza la consulta
-    $sql = "SELECT * FROM tu_tabla";
+    $sql = "SELECT * FROM Alumno";
     $result = $conn->query($sql);
 
     // Nombre del archivo CSV
-    $csvFile = 'resultados.csv';
+    $csvFile = 'ListadoAlumnos.csv';
 
     // Abre el archivo en modo escritura
     $file = fopen($csvFile, 'w');
-
-    // Escribe el encabezado del CSV
-    fputcsv($file, array('Columna1', 'Columna2', 'Columna3'));
-
     // Escribe los datos de la consulta en el CSV
-    while ($row = $result->fetch_assoc()) {
+    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
         fputcsv($file, $row);
+    }
+    // Cierra el archivo
+    fclose($file);
+
+    // Configura los encabezados para la descarga
+    header('Content-Type: text/csv');
+    header('Content-Disposition: attachment; filename="' . $csvFile . '"');
+
+    // Lee el archivo y lo imprime en la salida estándar
+    readfile($csvFile);
+    exit;
+}
+
+function ImportSQL($conn) // CSV a SQL
+{
+    $csvFile = "./ListadoAlumnos.csv";
+    // Abre el archivo CSV en modo lectura
+    $file = fopen($csvFile, 'r');
+
+    // Prepara la consulta de inserción
+    $sql = "INSERT INTO Alumno (" . implode(',') . ") VALUES (:" . implode(',:') . ")";
+    $stmt = $conn->prepare($sql);
+
+    // Lee cada línea del CSV y realiza la inserción en la base de datos
+    while (($data = fgetcsv($file)) !== false) {
+        $params = $data;
+        $stmt->execute($params);
     }
 
     // Cierra el archivo
     fclose($file);
-
-    // Cierra la conexión a la base de datos
-    $conn->close();
-
-    echo "Datos exportados a CSV correctamente.";
+    
+    echo "Datos importados desde CSV a MySQL correctamente.";
 }
+

@@ -31,9 +31,15 @@
     <form method="post" action="index.php">
     <h2>Exportar en archivos</h2>
     <input type="submit" value="Exportar CSV" name="csv">
-    <input type="submit" value="Exportar SQL" name="sql">
+    <input type="submit" value="Importar SQL" name="sql">
     </form>
     <?php
+    if (isset($_POST["csv"])) {
+        SaveCSV($conn);
+    }
+    if (isset($_POST["sql"])) {
+        ImportSQL($conn);   
+    }
     if (isset($_POST["search"])) {
         $searchname = $_POST["searchname"];
         SearchStudent($conn, $searchname);

@@ -179,5 +179,14 @@
                 $_COOKIE["name"];
         </pre>
     </div>
+    <div class="Hash password">
+        <h3>Hash Password</h3>
+        $password ='1234';
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        echo "HASH: $hash";
+        $HASH = 'Pones el hash que nos ha salido';
+        $verificacion = password_verify("1234", $HASH);
+        echo "<br> VERIFICACION: $verificacion";
+    </div> 
 </body>
 </html>
