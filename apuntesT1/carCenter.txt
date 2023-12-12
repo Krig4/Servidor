@@ -1,0 +1,16 @@
+1. Administrador
+    - Insertar, actualizar y borrar coches
+    - Sacar un csv con todos los coches, y si quieres que se pueda tambien json
+2. Clientes
+    - Comprar coches
+
+Para esto necesitamos la tienda de coches, además de un carrito de compra.
+Los clientes y los administradores pueden iniciar sesion, si inicia sesion un cliente, en el header tendra
+los enlaces de la tienda y el carrito, pero si un administrador inica se le añade el enlace de administrar
+(El administrador puede comprar tantos coches como quiera, pero el cliente tendra dinero para comprar coches)
+
+Normas: 
+
+- Todos los cambios se guardaran en mongodb, pero si el administrador lo pide se actualizarán en phpmyadmin
+- Todo tiene un diseño al menos que seá básico
+- Todos los coches guardados en el carrito a las cookies

@@ -1,0 +1,29 @@
+form .campos{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+form .campo{
+    display: flex;
+    flex-direction: column;
+    margin: 1%;
+    color: blue;
+}
+
+form input[type="submit"]{
+    margin-left: 1%;
+    margin-top: 2%;
+}
+
+div{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+div fieldset{
+    flex-grow: 1;
+}
+
+.fieldset_show{
+    margin-top: 2%;
+}

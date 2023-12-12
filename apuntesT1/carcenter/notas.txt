@@ -1,0 +1,23 @@
+<h3>Insertar un nuevo coche</h3>
+    <form action="../php/add_new_car.php" method="post">
+        <div class="data">
+            <div class="labels">
+                <label for="brand">Marca</label>
+                <label for="model">Modelo</label>
+                <label for="year">Año</label>
+            </div>
+            <div class="fields">
+                <select name="brand" id="brand">
+                    <option value="Ford">Ford</option>
+                    <option value="Renault">Renault</option>
+                    <option value="Honda">Honda</option>
+                    <option value="Hyundai">Hyundai</option>
+                    <option value="Nissan">Nissan</option>
+                    <option value="Mitsubishi">Mitsubishi</option>
+                </select>
+                <input type="text" name="model" id="model">
+                <input type="number" name="year" id="year">
+            </div>
+        </div>
+        <input type="submit" value="Añadir">
+    </form>
